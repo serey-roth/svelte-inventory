@@ -1,15 +1,19 @@
 <script lang="ts">
+  import App from "../App.svelte";
   import type { Item } from "../types";
+  import { createEventDispatcher } from "svelte";
 
   let name: string;
   let quantity: number = 1;
 
-  export let onAdd: (item: Item) => void;
+  const dispatch = createEventDispatcher();
   
   const handleAddItem = () => {
-    onAdd({ name, quantity });
+    dispatch('add', {
+      name,
+      quantity
+    });
   };
-
 </script>
 
 <form on:submit|preventDefault={handleAddItem}>

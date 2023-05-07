@@ -8,7 +8,7 @@
       name: "Gloves",
       quantity: 1,
     },
-  ];
+  ]
 
   $: total = items.reduce((initalTotal, item) => initalTotal + item.quantity, 0);
 
@@ -21,6 +21,11 @@
       items = items;
     }
   }
+
+  const handleAddNewItem = (event: CustomEvent<any>) => {
+    console.log(event)
+    addNewItem(event.detail);
+  }
 </script>
 
 <main class="flex justify-center bg-yellow-500 w-screen min-h-screen pt-4">
@@ -29,7 +34,7 @@
     <p class="font-sm text-lg">
       We're using Svelte to create and manage an inventory.
     </p>
-    <NewItemForm onAdd={addNewItem}/>
+    <NewItemForm on:add={handleAddNewItem}/>
     <div class="mt-4 bg-white max-w-[500px] rounded-md p-2 drop-shadow-md">
       <h3 class="font-semibold text-lg underline">Current Inventory</h3>
       <ul class="list-disc">
